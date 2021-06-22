@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">first app</string>
+    <string name="submit">Submit</string>
+    <string name="form_title">Fill up the following details</string>
+    <string name="user_name_hint">User name</string>
+    <string name="email_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="validate_password_hint">Validate password</string>
+    <string name="radio_male">Male</string>
+    <string name="radio_female">Female</string>
+    <string name="age">Age</string>
+
+    <array name="cities">
+        <item name="haifa">Haifa</item>
+        <item name="tel_aviv">Tel aviv</item>
+        <item name="eilat">Eilat</item>
+    </array>
+</resources>
