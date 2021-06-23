@@ -130,28 +130,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/age"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@id/team_til"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/city_spinner" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/team_til"
-        style="@style/FormStyle"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@id/submit_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/age_et">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/team" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@id/city_spinner" />
 
     <Button
         android:id="@+id/submit_btn"
@@ -162,6 +144,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/team_til" />
+        app:layout_constraintTop_toBottomOf="@id/age_et" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
