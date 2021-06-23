@@ -9,6 +9,8 @@
     <string name="radio_male">Male</string>
     <string name="radio_female">Female</string>
     <string name="age">Age</string>
+    <string name="team">Team</string>
+    <string name="city">City</string>
 
     <array name="cities">
         <item name="haifa">Haifa</item>

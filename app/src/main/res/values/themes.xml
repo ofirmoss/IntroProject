@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="FormStyle">
+
+        <item name="android:layout_marginTop">@dimen/form_margin</item>
+        <item name="android:textColorHint">@android:color/holo_blue_light</item>
+        <item name="android:backgroundTint">@android:color/holo_blue_light</item>
+
+    </style>
 </resources>
