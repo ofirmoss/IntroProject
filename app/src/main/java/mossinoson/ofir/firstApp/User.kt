@@ -1,3 +1,14 @@
 package mossinoson.ofir.firstApp
 
-data class User(var firstName: String, var lastName: String, var email: String)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class User(
+    var userName: String,
+    var email: String,
+    var password: String,
+    var gender: String,
+    var city: String,
+    var age: Int
+) : Parcelable

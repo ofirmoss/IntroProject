@@ -17,4 +17,11 @@
         <item name="tel_aviv">Tel aviv</item>
         <item name="eilat">Eilat</item>
     </array>
+
+    <string name="user_name_category">User name: %s</string>
+    <string name="email_category">Email: %s</string>
+    <string name="password_category">Password: %s</string>
+    <string name="gender_category">Gender: %s</string>
+    <string name="city_category">City: %s</string>
+    <string name="age_category">Age: %d</string>
 </resources>

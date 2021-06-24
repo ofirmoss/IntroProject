@@ -1,5 +1,6 @@
 package mossinoson.ofir.firstApp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.*
@@ -7,19 +8,26 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var userNameEt: EditText
+    private lateinit var userNameEt: EditText
+    private lateinit var emailEt: EditText
+    private lateinit var passwordEt: EditText
+    private lateinit var passwordValidationEt: EditText
+    private lateinit var genderRg: RadioGroup
+    private lateinit var citySpinner: Spinner
+    private lateinit var ageEt: EditText
+    private lateinit var submitBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        userNameEt = findViewById<EditText>(R.id.user_name_et)
-        val emailEt = findViewById<EditText>(R.id.email_et)
-        val passwordEt = findViewById<EditText>(R.id.password_et)
-        val passwordValidationEt = findViewById<EditText>(R.id.password_validation_et)
-        val genderRg = findViewById<RadioGroup>(R.id.gender_rg)
-        val citySpinner = findViewById<Spinner>(R.id.city_spinner)
-        val ageEt = findViewById<EditText>(R.id.age_et)
-        val submitBtn: Button = findViewById(R.id.submit_btn)
+        userNameEt = findViewById(R.id.user_name_et)
+        emailEt = findViewById(R.id.email_et)
+        passwordEt = findViewById(R.id.password_et)
+        passwordValidationEt = findViewById(R.id.password_validation_et)
+        genderRg = findViewById(R.id.gender_rg)
+        citySpinner = findViewById(R.id.city_spinner)
+        ageEt = findViewById(R.id.age_et)
+        submitBtn = findViewById(R.id.submit_btn)
 
         submitBtn.setOnClickListener {
             if (userNameEt.text.length < 3) {
@@ -61,15 +69,23 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-
-
             submit()
         }
     }
 
     private fun submit() {
-        var user = User("ofir", "mossinson", "asda")
-        user.email = "sd"
-        Toast.makeText(this, "submit", Toast.LENGTH_SHORT).show()
+        val user = User(
+            userNameEt.text.toString(),
+            emailEt.text.toString(),
+            passwordEt.text.toString(),
+            if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
+            citySpinner.selectedItem.toString(),
+            ageEt.text.toString().toInt()
+        )
+
+        Intent(this, UserListActivity::class.java).also {
+            it.putExtra("EXTRA_USER", user)
+            startActivity(it)
+        }
     }
 }
