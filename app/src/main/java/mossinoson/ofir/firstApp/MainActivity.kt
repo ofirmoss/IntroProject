@@ -16,10 +16,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var citySpinner: Spinner
     private lateinit var ageEt: EditText
     private lateinit var submitBtn: Button
+    private var usersList = mutableListOf<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         userNameEt = findViewById(R.id.user_name_et)
         emailEt = findViewById(R.id.email_et)
         passwordEt = findViewById(R.id.password_et)
@@ -70,6 +72,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             submit()
+
+
         }
     }
 
@@ -83,8 +87,10 @@ class MainActivity : AppCompatActivity() {
             ageEt.text.toString().toInt()
         )
 
+        usersList.add(user)
+
         Intent(this, UserListActivity::class.java).also {
-            it.putExtra("EXTRA_USER", user)
+            it.putParcelableArrayListExtra("EXTRA_USER_LIST", ArrayList(usersList))
             startActivity(it)
         }
     }
