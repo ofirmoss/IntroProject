@@ -1,5 +1,6 @@
 package mossinoson.ofir.firstApp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,11 +22,11 @@ class UserAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_user, parent, false)
-        return  UserViewHolder(view)
+        return UserViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.apply {
+        with(holder) {
             user_name_tv.text = users[position].userName
             email_tv.text = users[position].email
             password_tv.text = users[position].password
