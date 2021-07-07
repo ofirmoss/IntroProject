@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:background="@drawable/round_shape"
+    tools:context=".FormFragment">
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/form_title"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/user_name_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/user_name_et"
+        style="@style/FormStyle"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/user_name_hint"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/email_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/email_et"
+        style="@style/FormStyle"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@id/password_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_name_et" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/password_et"
+        style="@style/FormStyle"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@id/password_validation_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_et" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/password_validation_et"
+        style="@style/FormStyle"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/validate_password_hint"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@id/gender_rg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_et" />
+
+    <RadioGroup
+        android:id="@+id/gender_rg"
+        style="@style/FormStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/city_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_validation_et">
+
+        <RadioButton
+            android:id="@+id/male_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:buttonTint="@android:color/holo_blue_light"
+            android:text="@string/radio_male"
+            android:textColor="@android:color/holo_blue_light" />
+
+        <RadioButton
+            android:id="@+id/female_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:buttonTint="@android:color/holo_blue_light"
+            android:text="@string/radio_female"
+            android:textColor="@android:color/holo_blue_light" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/city_tv"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content"
+        android:text="@string/city"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/age_et"
+        app:layout_constraintEnd_toStartOf="@id/city_spinner"
+        app:layout_constraintStart_toStartOf="@id/gender_rg"
+        app:layout_constraintTop_toBottomOf="@id/gender_rg" />
+
+    <Spinner
+        android:id="@+id/city_spinner"
+        style="@style/FormStyle"
+        android:layout_width="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/cities"
+        app:layout_constraintBottom_toTopOf="@id/age_et"
+        app:layout_constraintEnd_toEndOf="@id/gender_rg"
+        app:layout_constraintStart_toEndOf="@id/city_tv"
+        app:layout_constraintTop_toBottomOf="@id/gender_rg" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/age_et"
+        style="@style/FormStyle"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/age"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/submit_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/city_spinner" />
+
+    <Button
+        android:id="@+id/submit_btn"
+        style="@style/FormStyle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/age_et" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

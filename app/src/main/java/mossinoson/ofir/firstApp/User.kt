@@ -12,3 +12,6 @@ data class User(
     var city: String,
     var age: Int
 ) : Parcelable
+
+@Parcelize
+class Users: ArrayList<User>(), Parcelable
