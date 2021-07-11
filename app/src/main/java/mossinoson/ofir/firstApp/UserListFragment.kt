@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import mossinoson.ofir.firstApp.data.UserViewModel
 
 class UserListFragment : Fragment() {
 
     private lateinit var usersListRv: RecyclerView
+    private lateinit var mUserViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,9 +25,12 @@ class UserListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val users = arguments?.let { UserListFragmentArgs.fromBundle(it).users } as List<User>
-
         usersListRv = requireView().findViewById(R.id.users_list_rv)
-        usersListRv.adapter = UserAdapter(users)
+        usersListRv.adapter = UserAdapter()
+
+        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        mUserViewModel.getAllUsers.observe(viewLifecycleOwner, { users ->
+            UserAdapter().setData(users)
+        })
     }
 }

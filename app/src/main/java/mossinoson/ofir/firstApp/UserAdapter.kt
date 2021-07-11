@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import mossinoson.ofir.firstApp.data.User
 
 class UserAdapter(
-    var users: List<User>
+//    var users: List<User>
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
+    private var users = emptyList<User>()
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val user_name_tv: TextView = itemView.findViewById(R.id.user_name_tv)
@@ -38,5 +41,10 @@ class UserAdapter(
 
     override fun getItemCount(): Int {
        return users.size
+    }
+
+    fun setData(users: List<User>) {
+        this.users = users
+        notifyDataSetChanged()
     }
 }

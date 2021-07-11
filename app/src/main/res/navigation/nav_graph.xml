@@ -19,9 +19,9 @@
         android:id="@+id/userListFragment"
         android:name="mossinoson.ofir.firstApp.UserListFragment"
         android:label="UserListFragment" >
-        <argument
-            android:name="users"
-            app:argType="mossinoson.ofir.firstApp.Users" />
+<!--        <argument-->
+<!--            android:name="users"-->
+<!--            app:argType="mossinoson.ofir.firstApp.Users" />-->
 
     </fragment>
 

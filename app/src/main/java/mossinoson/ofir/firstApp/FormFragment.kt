@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import mossinoson.ofir.firstApp.data.User
+import mossinoson.ofir.firstApp.data.UserViewModel
 
 
 class FormFragment : Fragment() {
@@ -20,13 +23,16 @@ class FormFragment : Fragment() {
     private lateinit var citySpinner: Spinner
     private lateinit var ageEt: EditText
     private lateinit var submitBtn: Button
-    private var usersList = Users()
+    private lateinit var mUserViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
         return inflater.inflate(R.layout.fragment_form, container, false)
     }
 
@@ -97,17 +103,10 @@ class FormFragment : Fragment() {
             ageEt.text.toString().toInt()
         )
 
-        usersList.add(user)
+//        usersList.add(user)
+        mUserViewModel.addUser(user)
 
-//        val bundle = bundleOf("users" to usersList)
-//        findNavController().navigate(R.id.userListFragment, bundle)
-        val action = FormFragmentDirections.actionFormFragmentToUserListFragment(usersList)
+        val action = FormFragmentDirections.actionFormFragmentToUserListFragment()
         findNavController().navigate(action)
-
-//        Intent(this, UserListActivity::class.java).also {
-//            it.putParcelableArrayListExtra("EXTRA_USER_LIST", ArrayList(usersList))
-//            startActivity(it)
-//        }
-
     }
 }
