@@ -1,4 +1,4 @@
-package mossinoson.ofir.firstApp.data
+package mossinoson.ofir.firstApp.ui.userlist
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,8 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import mossinoson.ofir.firstApp.data.local.entity.User
+import mossinoson.ofir.firstApp.data.local.db.UserDatebase
+import mossinoson.ofir.firstApp.data.repository.UserRepository
 
-class UserViewModel(application: Application): AndroidViewModel(application)  {
+class UserListViewModel(application: Application): AndroidViewModel(application)  {
 
     val getAllUsers: LiveData<List<User>>
     private  val repository: UserRepository

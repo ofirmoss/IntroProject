@@ -1,16 +1,16 @@
-package mossinoson.ofir.firstApp
+package mossinoson.ofir.firstApp.ui.userlist
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import mossinoson.ofir.firstApp.data.User
+import mossinoson.ofir.firstApp.R
+import mossinoson.ofir.firstApp.data.local.entity.User
 
-class UserAdapter(
+class UserListAdapter(
 //    var users: List<User>
-) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
     private var users = emptyList<User>()
 

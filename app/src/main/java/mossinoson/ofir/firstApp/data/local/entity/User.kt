@@ -1,4 +1,4 @@
-package mossinoson.ofir.firstApp.data
+package mossinoson.ofir.firstApp.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

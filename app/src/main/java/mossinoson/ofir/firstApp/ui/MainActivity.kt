@@ -1,7 +1,8 @@
-package mossinoson.ofir.firstApp
+package mossinoson.ofir.firstApp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import mossinoson.ofir.firstApp.R
 
 class MainActivity: AppCompatActivity() {
 

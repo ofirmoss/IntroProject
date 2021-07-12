@@ -1,4 +1,4 @@
-package mossinoson.ofir.firstApp
+package mossinoson.ofir.firstApp.ui.form
 
 import android.os.Bundle
 import android.util.Patterns
@@ -9,8 +9,9 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import mossinoson.ofir.firstApp.data.User
-import mossinoson.ofir.firstApp.data.UserViewModel
+import mossinoson.ofir.firstApp.R
+import mossinoson.ofir.firstApp.data.local.entity.User
+import mossinoson.ofir.firstApp.ui.userlist.UserListViewModel
 
 
 class FormFragment : Fragment() {
@@ -23,7 +24,7 @@ class FormFragment : Fragment() {
     private lateinit var citySpinner: Spinner
     private lateinit var ageEt: EditText
     private lateinit var submitBtn: Button
-    private lateinit var mUserViewModel: UserViewModel
+    private lateinit var mUserListViewModel: UserListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +32,7 @@ class FormFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        mUserListViewModel = ViewModelProvider(this).get(UserListViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_form, container, false)
     }
@@ -104,7 +105,7 @@ class FormFragment : Fragment() {
         )
 
 //        usersList.add(user)
-        mUserViewModel.addUser(user)
+        mUserListViewModel.addUser(user)
 
         val action = FormFragmentDirections.actionFormFragmentToUserListFragment()
         findNavController().navigate(action)

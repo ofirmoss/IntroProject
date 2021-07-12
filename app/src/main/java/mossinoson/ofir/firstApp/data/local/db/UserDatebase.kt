@@ -1,9 +1,11 @@
-package mossinoson.ofir.firstApp.data
+package mossinoson.ofir.firstApp.data.local.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import mossinoson.ofir.firstApp.data.local.entity.User
+import mossinoson.ofir.firstApp.data.local.db.dao.UserDao
 
 @Database(entities = [User::class], version = 1, exportSchema = false)
 abstract class UserDatebase : RoomDatabase() {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/formFragment"
-        android:name="mossinoson.ofir.firstApp.FormFragment"
+        android:name="mossinoson.ofir.firstApp.ui.form.FormFragment"
         android:label="FormFragment"
         tools:layout="@layout/fragment_form" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/userListFragment"
-        android:name="mossinoson.ofir.firstApp.UserListFragment"
+        android:name="mossinoson.ofir.firstApp.ui.userlist.UserListFragment"
         android:label="UserListFragment" >
 <!--        <argument-->
 <!--            android:name="users"-->
