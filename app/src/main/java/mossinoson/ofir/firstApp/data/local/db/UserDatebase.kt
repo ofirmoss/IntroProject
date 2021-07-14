@@ -8,7 +8,7 @@ import mossinoson.ofir.firstApp.data.local.entity.User
 import mossinoson.ofir.firstApp.data.local.db.dao.UserDao
 
 @Database(entities = [User::class], version = 1, exportSchema = false)
-abstract class UserDatebase : RoomDatabase() {
+public abstract class UserDatebase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
 
