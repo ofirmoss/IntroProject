@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_form" >
         <action
             android:id="@+id/action_formFragment_to_userListFragment"
-            app:destination="@id/userListFragment" />
+            app:destination="@id/userListFragment"
+            app:enterAnim="@anim/from_bottom" />
         <argument
             android:defaultValue="@null"
             app:nullable="true"
@@ -26,7 +27,8 @@
         android:label="UserListFragment" >
         <action
             android:id="@+id/action_userListFragment_to_formFragment"
-            app:destination="@id/formFragment"/>
+            app:destination="@id/formFragment"
+            app:enterAnim="@anim/from_right" />
     </fragment>
 
 </navigation>
