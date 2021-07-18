@@ -5,7 +5,7 @@ import androidx.room.*
 import mossinoson.ofir.firstApp.data.local.entity.User
 
 @Dao
-interface UserDao {
+interface  UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addUser(user: User)

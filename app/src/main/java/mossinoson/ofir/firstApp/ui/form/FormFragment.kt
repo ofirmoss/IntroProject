@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.textfield.TextInputLayout
 import mossinoson.ofir.firstApp.R
 import mossinoson.ofir.firstApp.data.local.entity.User
 import mossinoson.ofir.firstApp.ui.userlist.UserListViewModel
@@ -19,13 +21,13 @@ class FormFragment : Fragment() {
 
     private val args by navArgs<FormFragmentArgs>()
 
-    private lateinit var userNameEt: EditText
-    private lateinit var emailEt: EditText
-    private lateinit var passwordEt: EditText
-    private lateinit var passwordValidationEt: EditText
+    private lateinit var userNameTil: TextInputLayout
+    private lateinit var emailTil: TextInputLayout
+    private lateinit var passwordTil: TextInputLayout
+    private lateinit var passwordValidationTil: TextInputLayout
     private lateinit var genderRg: RadioGroup
     private lateinit var citySpinner: Spinner
-    private lateinit var ageEt: EditText
+    private lateinit var ageTil: TextInputLayout
     private lateinit var submitBtn: Button
 
     private lateinit var mUserListViewModel: UserListViewModel
@@ -44,17 +46,16 @@ class FormFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_form, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         requireView().apply {
-            userNameEt = findViewById(R.id.user_name_et)
-            emailEt = findViewById(R.id.email_et)
-            passwordEt = findViewById(R.id.password_et)
-            passwordValidationEt = findViewById(R.id.password_validation_et)
+            userNameTil = findViewById(R.id.user_name_et)
+            emailTil = findViewById(R.id.email_et)
+            passwordTil = findViewById(R.id.password_et)
+            passwordValidationTil = findViewById(R.id.password_validation_et)
             genderRg = findViewById(R.id.gender_rg)
             citySpinner = findViewById(R.id.city_spinner)
-            ageEt = findViewById(R.id.age_et)
+            ageTil = findViewById(R.id.age_et)
             submitBtn = findViewById(R.id.submit_btn)
         }
 
@@ -65,28 +66,32 @@ class FormFragment : Fragment() {
             fillUserDetails()
         }
 
+        userNameTil.editText?.doAfterTextChanged {
+            userNameTil.error = null
+        }
+
+        emailTil.editText?.doAfterTextChanged {
+            userNameTil.error = null
+        }
+
         submitBtn.setOnClickListener {
 
-            if (userNameEt.text.toString() == "pass") {
+            if (userNameTil.editText?.text.toString() == "pass") {
                 navigateToUserList()
                 return@setOnClickListener
             }
 
-            if (userNameEt.text.length < 3) {
-                Toast.makeText(
-                    requireContext(),
-                    "user name should contain at least 3 chars",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (userNameTil.editText?.text?.length ?: 0 < 3) {
+                userNameTil.error = "user name should contain at least 3 chars"
                 return@setOnClickListener
             }
 
-            if (!Patterns.EMAIL_ADDRESS.matcher(emailEt.text).matches()) {
-                Toast.makeText(requireContext(), "email should be valid", Toast.LENGTH_SHORT).show()
+            if (!Patterns.EMAIL_ADDRESS.matcher(emailTil.editText?.text.toString()).matches()) {
+                emailTil.error = "email should be valid"
                 return@setOnClickListener
             }
 
-            if (passwordEt.text.isEmpty() || passwordValidationEt.text.isEmpty() || passwordEt.text.toString() != passwordValidationEt.text.toString()) {
+            if (passwordTil.editText?.text?.isEmpty() == true || passwordValidationTil.editText?.text?.isEmpty() == true || passwordTil.editText?.text.toString() != passwordValidationTil.editText?.text.toString()) {
                 Toast.makeText(
                     requireContext(),
                     "password and password validation should be the same",
@@ -107,7 +112,7 @@ class FormFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (ageEt.text.isEmpty()) {
+            if (ageTil.editText?.text?.isEmpty() == true) {
                 Toast.makeText(requireContext(), "please insert age", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -118,10 +123,10 @@ class FormFragment : Fragment() {
 
     private fun fillUserDetails() {
         user?.apply {
-            userNameEt.setText(userName)
-            emailEt.setText(email)
-            passwordEt.setText(password)
-            passwordValidationEt.setText(password)
+            userNameTil.editText?.setText(userName)
+            emailTil.editText?.setText(email)
+            passwordTil.editText?.setText(password)
+            passwordValidationTil.editText?.setText(password)
             genderRg.check(if (gender == "male") R.id.male_rb else R.id.female_rb)
 //            val citiesMap = {
 //                "Haifa": 0,
@@ -129,7 +134,7 @@ class FormFragment : Fragment() {
 //                "Eilat": 2
 //            }
 //            citySpinner.setSelection(citiesMap[user.city])
-            ageEt.setText(age.toString())
+            ageTil.editText?.setText(age.toString())
         }
     }
 
@@ -150,12 +155,12 @@ class FormFragment : Fragment() {
 
     private fun extractUserData() {
         user = User(
-            userNameEt.text.toString(),
-            emailEt.text.toString(),
-            passwordEt.text.toString(),
+            userNameTil.editText?.text.toString(),
+            emailTil.editText?.text.toString(),
+            passwordTil.editText?.text.toString(),
             if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
             citySpinner.selectedItem.toString(),
-            ageEt.text.toString().toInt(),
+            ageTil.editText?.text.toString().toInt(),
             user?.id ?: 0
         )
     }

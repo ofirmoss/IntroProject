@@ -21,19 +21,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/user_name_et"
         style="@style/FormStyle"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:hint="@string/user_name_hint"
-        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@id/email_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+        app:boxBackgroundColor="#0D777777"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="15"
+        app:layout_constraintTop_toBottomOf="@id/title_tv">
 
-    <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:maxLength="15"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_et"
         style="@style/FormStyle"
         android:layout_width="240dp"
@@ -43,9 +57,23 @@
         app:layout_constraintBottom_toTopOf="@id/password_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_name_et" />
+        app:boxBackgroundColor="#0D777777"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="25"
+        app:layout_constraintTop_toBottomOf="@id/user_name_et">
 
-    <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:maxLength="25"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_et"
         style="@style/FormStyle"
         android:layout_width="240dp"
@@ -55,9 +83,19 @@
         app:layout_constraintBottom_toTopOf="@id/password_validation_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_et" />
+        app:boxBackgroundColor="#0D777777"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/email_et">
 
-    <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_validation_et"
         style="@style/FormStyle"
         android:layout_width="240dp"
@@ -67,7 +105,17 @@
         app:layout_constraintBottom_toTopOf="@id/gender_rg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_et" />
+        app:boxBackgroundColor="#0D777777"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/password_et">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
         android:id="@+id/gender_rg"
@@ -103,8 +151,8 @@
     <TextView
         android:id="@+id/city_tv"
         android:layout_width="wrap_content"
-        android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:text="@string/city"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="18sp"
@@ -117,15 +165,15 @@
         android:id="@+id/city_spinner"
         style="@style/FormStyle"
         android:layout_width="0dp"
-        android:layout_marginStart="10dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:entries="@array/cities"
         app:layout_constraintBottom_toTopOf="@id/age_et"
         app:layout_constraintEnd_toEndOf="@id/gender_rg"
         app:layout_constraintStart_toEndOf="@id/city_tv"
         app:layout_constraintTop_toBottomOf="@id/gender_rg" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/age_et"
         style="@style/FormStyle"
         android:layout_width="240dp"
@@ -135,7 +183,18 @@
         app:layout_constraintBottom_toTopOf="@id/submit_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/city_spinner" />
+        app:boxBackgroundColor="#0D777777"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/city_spinner">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/submit_btn"

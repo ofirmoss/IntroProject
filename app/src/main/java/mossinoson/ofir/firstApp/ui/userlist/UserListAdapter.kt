@@ -17,13 +17,13 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
     var onDeleteUserListener: OnDeleteUserListener?=null
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val user_name_tv: TextView = itemView.findViewById(R.id.user_name_tv)
-        val email_tv: TextView = itemView.findViewById(R.id.email_tv)
-        val gender_tv: TextView = itemView.findViewById(R.id.gender_tv)
-        val city_tv: TextView = itemView.findViewById(R.id.city_tv)
-        val age_tv: TextView = itemView.findViewById(R.id.age_tv)
-        val delete_btn: ImageButton = itemView.findViewById(R.id.delete_btn)
-        val edit_btn: ImageButton = itemView.findViewById(R.id.edit_btn)
+        val userNameTv: TextView = itemView.findViewById(R.id.user_name_tv)
+        val emailTv: TextView = itemView.findViewById(R.id.email_tv)
+        val genderTv: TextView = itemView.findViewById(R.id.gender_tv)
+        val cityTv: TextView = itemView.findViewById(R.id.city_tv)
+        val ageTv: TextView = itemView.findViewById(R.id.age_tv)
+        val deleteBtn: ImageButton = itemView.findViewById(R.id.delete_btn)
+        val editBtn: ImageButton = itemView.findViewById(R.id.edit_btn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -35,19 +35,19 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
         val currentItem = users[position]
 
         with(holder) {
-            user_name_tv.text = users[position].userName
-            email_tv.text = users[position].email
-            gender_tv.text = users[position].gender
-            city_tv.text = users[position].city
-            age_tv.text = users[position].age.toString()
+            userNameTv.text = users[position].userName
+            emailTv.text = users[position].email
+            genderTv.text = users[position].gender
+            cityTv.text = users[position].city
+            ageTv.text = users[position].age.toString()
         }
 
-        holder.edit_btn.setOnClickListener {
+        holder.editBtn.setOnClickListener {
             val action = UserListFragmentDirections.actionUserListFragmentToFormFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
 
-        holder.delete_btn.setOnClickListener {
+        holder.deleteBtn.setOnClickListener {
             onDeleteUserListener?.onDeleteUser(currentItem)
         }
     }
