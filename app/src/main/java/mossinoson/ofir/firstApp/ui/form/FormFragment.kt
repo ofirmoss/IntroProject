@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import mossinoson.ofir.firstApp.R
 import mossinoson.ofir.firstApp.data.local.entity.User
@@ -27,13 +28,14 @@ class FormFragment : Fragment() {
     private lateinit var passwordValidationTil: TextInputLayout
     private lateinit var genderRg: RadioGroup
     private lateinit var citySpinner: Spinner
-    private lateinit var ageTil: TextInputLayout
+    private lateinit var ageBtn: Button
     private lateinit var submitBtn: Button
 
     private lateinit var mUserListViewModel: UserListViewModel
 
     private var user: User? = null
     private var isNew: Boolean = true
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,34 +50,30 @@ class FormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireView().apply {
-            userNameTil = findViewById(R.id.user_name_et)
-            emailTil = findViewById(R.id.email_et)
-            passwordTil = findViewById(R.id.password_et)
-            passwordValidationTil = findViewById(R.id.password_validation_et)
-            genderRg = findViewById(R.id.gender_rg)
-            citySpinner = findViewById(R.id.city_spinner)
-            ageTil = findViewById(R.id.age_et)
-            submitBtn = findViewById(R.id.submit_btn)
+        setViews()
+        checkIfNewUser()
+        removeErrorsWhenTextChanges()
+        setAgeDatePicker()
+        setSubmitBtnClickListener()
+    }
+
+    private fun setAgeDatePicker() {
+        MaterialDatePicker.Builder.datePicker()
+        .setTitleText("select birth date")
+        .build().apply {
+            ageBtn.setOnClickListener {
+                show(requireActivity().supportFragmentManager, "")
+            }
+
+            addOnPositiveButtonClickListener {
+                ageBtn.text = headerText
+
+            }
         }
+    }
 
-
-        user = args.user
-        user?.let {
-            isNew = false
-            fillUserDetails()
-        }
-
-        userNameTil.editText?.doAfterTextChanged {
-            userNameTil.error = null
-        }
-
-        emailTil.editText?.doAfterTextChanged {
-            userNameTil.error = null
-        }
-
+    private fun setSubmitBtnClickListener() {
         submitBtn.setOnClickListener {
-
             if (userNameTil.editText?.text.toString() == "pass") {
                 navigateToUserList()
                 return@setOnClickListener
@@ -112,12 +110,43 @@ class FormFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (ageTil.editText?.text?.isEmpty() == true) {
-                Toast.makeText(requireContext(), "please insert age", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+//            if (ageBtn.editText?.text?.isEmpty() == true) {
+//                Toast.makeText(requireContext(), "please insert age", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
 
             submit()
+        }
+    }
+
+    private fun removeErrorsWhenTextChanges() {
+        userNameTil.editText?.doAfterTextChanged {
+            userNameTil.error = null
+        }
+
+        emailTil.editText?.doAfterTextChanged {
+            userNameTil.error = null
+        }
+    }
+
+    private fun checkIfNewUser() {
+        user = args.user
+        user?.let {
+            isNew = false
+            fillUserDetails()
+        }
+    }
+
+    private fun setViews() {
+        requireView().apply {
+            userNameTil = findViewById(R.id.user_name_et)
+            emailTil = findViewById(R.id.email_et)
+            passwordTil = findViewById(R.id.password_et)
+            passwordValidationTil = findViewById(R.id.password_validation_et)
+            genderRg = findViewById(R.id.gender_rg)
+            citySpinner = findViewById(R.id.city_spinner)
+            ageBtn = findViewById(R.id.age_et)
+            submitBtn = findViewById(R.id.submit_btn)
         }
     }
 
@@ -134,7 +163,7 @@ class FormFragment : Fragment() {
 //                "Eilat": 2
 //            }
 //            citySpinner.setSelection(citiesMap[user.city])
-            ageTil.editText?.setText(age.toString())
+//            ageBtn.editText?.setText(age.toString())
         }
     }
 
@@ -154,13 +183,13 @@ class FormFragment : Fragment() {
     }
 
     private fun extractUserData() {
-        user = User(
+            user = User(
             userNameTil.editText?.text.toString(),
             emailTil.editText?.text.toString(),
             passwordTil.editText?.text.toString(),
             if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
             citySpinner.selectedItem.toString(),
-            ageTil.editText?.text.toString().toInt(),
+//            ageBtn.editText?.text.toString().toInt(),
             user?.id ?: 0
         )
     }

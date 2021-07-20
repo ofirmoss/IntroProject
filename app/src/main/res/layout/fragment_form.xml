@@ -173,28 +173,40 @@
         app:layout_constraintStart_toEndOf="@id/city_tv"
         app:layout_constraintTop_toBottomOf="@id/gender_rg" />
 
-    <com.google.android.material.textfield.TextInputLayout
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/age_et"-->
+<!--        style="@style/FormStyle"-->
+<!--        android:layout_width="240dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="@string/age"-->
+<!--        android:inputType="number"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/submit_btn"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:boxBackgroundColor="#0D777777"-->
+<!--        app:endIconMode="clear_text"-->
+<!--        app:errorEnabled="true"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/city_spinner">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="textCapWords"-->
+<!--            />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <Button
         android:id="@+id/age_et"
-        style="@style/FormStyle"
-        android:layout_width="240dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/age"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@id/submit_btn"
+        android:text="Date of birth"
+        app:layout_constraintBottom_toTopOf="@+id/submit_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:boxBackgroundColor="#0D777777"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/city_spinner">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/city_spinner"
+        android:background="#0D777777"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/submit_btn"
@@ -206,5 +218,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/age_et" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
