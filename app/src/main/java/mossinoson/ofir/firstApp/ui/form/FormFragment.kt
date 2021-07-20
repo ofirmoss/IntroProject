@@ -17,7 +17,6 @@ import mossinoson.ofir.firstApp.R
 import mossinoson.ofir.firstApp.data.local.entity.User
 import mossinoson.ofir.firstApp.ui.userlist.UserListViewModel
 import java.text.SimpleDateFormat
-import kotlin.properties.Delegates
 
 
 class FormFragment : Fragment() {
@@ -37,7 +36,7 @@ class FormFragment : Fragment() {
 
     private var user: User? = null
     private var isNew: Boolean = true
-    private var dobTimestamp by Delegates.notNull<Long>()
+    private var dobTimestamp: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -163,6 +162,7 @@ class FormFragment : Fragment() {
 //                "Eilat": 2
 //            }
 //            citySpinner.setSelection(citiesMap[user.city])
+//            ageBtn.text = age.toString()
             ageBtn.text = (getDateStr(age))
         }
     }
@@ -183,20 +183,22 @@ class FormFragment : Fragment() {
     }
 
     private fun extractUserData() {
-        user = User(
-            userNameTil.editText?.text.toString(),
-            emailTil.editText?.text.toString(),
-            passwordTil.editText?.text.toString(),
-            if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
-            citySpinner.selectedItem.toString(),
-//            ageBtn.editText?.text.toString().toInt(),
-            dobTimestamp,
-            user?.id ?: 0
-        )
+        user = dobTimestamp?.let {
+            User(
+                userNameTil.editText?.text.toString(),
+                emailTil.editText?.text.toString(),
+                passwordTil.editText?.text.toString(),
+                if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
+                citySpinner.selectedItem.toString(),
+    //            ageBtn.editText?.text.toString().toInt(),
+                it,
+                user?.id ?: 0
+            )
+        }
     }
 
     private fun getDateStr(time_stamp_server: Long): String? {
-        val formatter = SimpleDateFormat("dd-mm-yyyy")
+        val formatter = SimpleDateFormat("MMM dd, yyyy")
         return formatter.format(time_stamp_server)
     }
 
