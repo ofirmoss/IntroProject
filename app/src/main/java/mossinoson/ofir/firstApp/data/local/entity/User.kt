@@ -13,7 +13,7 @@ data class User(
     val password: String,
     val gender: String,
     val city: String,
-    val age: Int,
+    val age: Long,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 ): Parcelable

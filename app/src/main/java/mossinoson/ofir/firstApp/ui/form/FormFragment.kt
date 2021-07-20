@@ -16,6 +16,8 @@ import com.google.android.material.textfield.TextInputLayout
 import mossinoson.ofir.firstApp.R
 import mossinoson.ofir.firstApp.data.local.entity.User
 import mossinoson.ofir.firstApp.ui.userlist.UserListViewModel
+import java.text.SimpleDateFormat
+import kotlin.properties.Delegates
 
 
 class FormFragment : Fragment() {
@@ -35,7 +37,7 @@ class FormFragment : Fragment() {
 
     private var user: User? = null
     private var isNew: Boolean = true
-
+    private var dobTimestamp by Delegates.notNull<Long>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,22 +55,20 @@ class FormFragment : Fragment() {
         setViews()
         checkIfNewUser()
         removeErrorsWhenTextChanges()
-        setAgeDatePicker()
+        setAgeBtnClickListener()
         setSubmitBtnClickListener()
     }
 
-    private fun setAgeDatePicker() {
-        MaterialDatePicker.Builder.datePicker()
-        .setTitleText("select birth date")
-        .build().apply {
-            ageBtn.setOnClickListener {
-                show(requireActivity().supportFragmentManager, "")
-            }
-
-            addOnPositiveButtonClickListener {
-                ageBtn.text = headerText
-
-            }
+    private fun setAgeBtnClickListener() {
+        ageBtn.setOnClickListener {
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("select birth date")
+                .build().apply {
+                    addOnPositiveButtonClickListener {
+                        ageBtn.text = headerText
+                        dobTimestamp = it
+                    }
+                }.show(requireActivity().supportFragmentManager, "")
         }
     }
 
@@ -110,10 +110,10 @@ class FormFragment : Fragment() {
                 return@setOnClickListener
             }
 
-//            if (ageBtn.editText?.text?.isEmpty() == true) {
-//                Toast.makeText(requireContext(), "please insert age", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
+            if (ageBtn.text?.isEmpty() == true) {
+                Toast.makeText(requireContext(), "please insert age", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             submit()
         }
@@ -163,7 +163,7 @@ class FormFragment : Fragment() {
 //                "Eilat": 2
 //            }
 //            citySpinner.setSelection(citiesMap[user.city])
-//            ageBtn.editText?.setText(age.toString())
+            ageBtn.text = (getDateStr(age))
         }
     }
 
@@ -183,15 +183,21 @@ class FormFragment : Fragment() {
     }
 
     private fun extractUserData() {
-            user = User(
+        user = User(
             userNameTil.editText?.text.toString(),
             emailTil.editText?.text.toString(),
             passwordTil.editText?.text.toString(),
             if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
             citySpinner.selectedItem.toString(),
 //            ageBtn.editText?.text.toString().toInt(),
+            dobTimestamp,
             user?.id ?: 0
         )
+    }
+
+    private fun getDateStr(time_stamp_server: Long): String? {
+        val formatter = SimpleDateFormat("dd-mm-yyyy")
+        return formatter.format(time_stamp_server)
     }
 
     private fun navigateToUserList() {
