@@ -1,6 +1,7 @@
 package mossinoson.ofir.firstApp.ui.form
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.gms.common.api.Status
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import mossinoson.ofir.firstApp.R
@@ -29,7 +35,6 @@ class FormFragment : Fragment() {
     private lateinit var passwordTil: TextInputLayout
     private lateinit var passwordValidationTil: TextInputLayout
     private lateinit var genderRg: RadioGroup
-    private lateinit var citySpinner: Spinner
     private lateinit var ageBtn: Button
     private lateinit var submitBtn: Button
 
@@ -56,6 +61,7 @@ class FormFragment : Fragment() {
         removeErrorsWhenTextChanges()
         setAgeBtnClickListener()
         setSubmitBtnClickListener()
+        initAutoCompletePlaces()
     }
 
     private fun setAgeBtnClickListener() {
@@ -103,12 +109,6 @@ class FormFragment : Fragment() {
                 return@setOnClickListener
             }
 
-//            Spinner1.getSelectedItem().toString().trim().equals("Pick one")
-            if (citySpinner.selectedItem == null) {
-                Toast.makeText(requireContext(), "please select a city", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
             if (ageBtn.text?.isEmpty() == true) {
                 Toast.makeText(requireContext(), "please insert age", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -143,7 +143,6 @@ class FormFragment : Fragment() {
             passwordTil = findViewById(R.id.password_et)
             passwordValidationTil = findViewById(R.id.password_validation_et)
             genderRg = findViewById(R.id.gender_rg)
-            citySpinner = findViewById(R.id.city_spinner)
             ageBtn = findViewById(R.id.age_et)
             submitBtn = findViewById(R.id.submit_btn)
         }
@@ -156,12 +155,6 @@ class FormFragment : Fragment() {
             passwordTil.editText?.setText(password)
             passwordValidationTil.editText?.setText(password)
             genderRg.check(if (gender == "male") R.id.male_rb else R.id.female_rb)
-//            val citiesMap = {
-//                "Haifa": 0,
-//                "Tel aviv": 1,
-//                "Eilat": 2
-//            }
-//            citySpinner.setSelection(citiesMap[user.city])
             ageBtn.text = (TimeUtil.getDateStr(dobTimestamp))
         }
     }
@@ -188,7 +181,7 @@ class FormFragment : Fragment() {
                 emailTil.editText?.text.toString(),
                 passwordTil.editText?.text.toString(),
                 if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
-                citySpinner.selectedItem.toString(),
+                "",
                 it as Long,
                 user?.id ?: 0
             )
@@ -199,5 +192,30 @@ class FormFragment : Fragment() {
     private fun navigateToUserList() {
         val action = FormFragmentDirections.actionFormFragmentToUserListFragment()
         findNavController().navigate(action)
+    }
+
+    private fun initAutoCompletePlaces() {
+
+        Places.initialize(requireActivity(), getString(R.string.api_key), Locale.getDefault())
+        // Initialize the AutocompleteSupportFragment.
+        val autocompleteFragment =
+            childFragmentManager.findFragmentById(R.id.autocomplete_fragment)
+                    as AutocompleteSupportFragment
+
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                // Get info about the selected place.
+                Log.d("Ofir", "Place: ${place.name}, ${place.id}")
+            }
+
+            override fun onError(status: Status) {
+                // Handle the error.
+                Log.d("Ofir", "An error occurred: $status")
+            }
+        })
     }
 }

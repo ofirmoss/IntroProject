@@ -27,23 +27,22 @@
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:hint="@string/user_name_hint"
+        app:boxBackgroundColor="#0D777777"
+        app:counterEnabled="true"
+        app:counterMaxLength="15"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/email_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:boxBackgroundColor="#0D777777"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:counterEnabled="true"
-        app:counterMaxLength="15"
         app:layout_constraintTop_toBottomOf="@id/title_tv">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="@string/alphbet_letters"
             android:inputType="text"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:maxLength="15"
-            />
+            android:maxLength="15" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,22 +53,21 @@
         android:layout_height="wrap_content"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
+        app:boxBackgroundColor="#0D777777"
+        app:counterEnabled="true"
+        app:counterMaxLength="25"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/password_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:boxBackgroundColor="#0D777777"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:counterEnabled="true"
-        app:counterMaxLength="25"
         app:layout_constraintTop_toBottomOf="@id/user_name_et">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
-            android:maxLength="25"
-            />
+            android:maxLength="25" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,18 +78,17 @@
         android:layout_height="wrap_content"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
+        app:boxBackgroundColor="#0D777777"
         app:layout_constraintBottom_toTopOf="@id/password_validation_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:boxBackgroundColor="#0D777777"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/email_et">
+        app:layout_constraintTop_toBottomOf="@id/email_et"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            />
+            android:inputType="textCapWords" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,18 +99,17 @@
         android:layout_height="wrap_content"
         android:hint="@string/validate_password_hint"
         android:inputType="textPassword"
+        app:boxBackgroundColor="#0D777777"
         app:layout_constraintBottom_toTopOf="@id/gender_rg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:boxBackgroundColor="#0D777777"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/password_et">
+        app:layout_constraintTop_toBottomOf="@id/password_et"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            />
+            android:inputType="textCapWords" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/city_spinner"
+        app:layout_constraintBottom_toTopOf="@id/autocomplete_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_validation_et">
@@ -148,65 +144,29 @@
 
     </RadioGroup>
 
-    <TextView
-        android:id="@+id/city_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/city"
-        android:textColor="@android:color/holo_blue_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/age_et"
-        app:layout_constraintEnd_toStartOf="@id/city_spinner"
-        app:layout_constraintStart_toStartOf="@id/gender_rg"
-        app:layout_constraintTop_toBottomOf="@id/gender_rg" />
-
-    <Spinner
-        android:id="@+id/city_spinner"
-        style="@style/FormStyle"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/autocomplete_fragment"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:entries="@array/cities"
-        app:layout_constraintBottom_toTopOf="@id/age_et"
-        app:layout_constraintEnd_toEndOf="@id/gender_rg"
-        app:layout_constraintStart_toEndOf="@id/city_tv"
-        app:layout_constraintTop_toBottomOf="@id/gender_rg" />
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/age_et"-->
-<!--        style="@style/FormStyle"-->
-<!--        android:layout_width="240dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="@string/age"-->
-<!--        android:inputType="number"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/submit_btn"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:boxBackgroundColor="#0D777777"-->
-<!--        app:endIconMode="clear_text"-->
-<!--        app:errorEnabled="true"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/city_spinner">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:inputType="textCapWords"-->
-<!--            />-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/age_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gender_rg" />
 
     <Button
         android:id="@+id/age_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date of birth"
+        android:background="#0D777777"
+        android:text="@string/date_of_birth"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/submit_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/city_spinner"
-        android:background="#0D777777"
-        android:textColor="@color/black"/>
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment" />
 
     <Button
         android:id="@+id/submit_btn"

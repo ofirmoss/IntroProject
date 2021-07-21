@@ -24,4 +24,7 @@
     <string name="gender_category">Gender: %s</string>
     <string name="city_category">City: %s</string>
     <string name="age_category">Age: %d</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="api_key">AIzaSyDGjoX65EmooFbZ03gaBArqyjZNS5yfQZU</string>
+    <string name="alphbet_letters">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 </resources>
