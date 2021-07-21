@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import mossinoson.ofir.firstApp.R
 import mossinoson.ofir.firstApp.data.local.entity.User
+import mossinoson.ofir.firstApp.utils.TimeUtil
 
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
@@ -35,11 +36,14 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
         val currentItem = users[position]
 
         with(holder) {
-            userNameTv.text = users[position].userName
-            emailTv.text = users[position].email
-            genderTv.text = users[position].gender
-            cityTv.text = users[position].city
-            ageTv.text = users[position].age.toString()
+            users[position].apply {
+                userNameTv.text = userName
+                emailTv.text = email
+                genderTv.text = gender
+                cityTv.text = city
+//            ageTv.text = users[position].dobTimestamp.toString()
+                ageTv.text = TimeUtil.getDateStr(dobTimestamp)
+            }
         }
 
         holder.editBtn.setOnClickListener {

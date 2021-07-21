@@ -16,7 +16,8 @@ import com.google.android.material.textfield.TextInputLayout
 import mossinoson.ofir.firstApp.R
 import mossinoson.ofir.firstApp.data.local.entity.User
 import mossinoson.ofir.firstApp.ui.userlist.UserListViewModel
-import java.text.SimpleDateFormat
+import mossinoson.ofir.firstApp.utils.TimeUtil
+import java.util.*
 
 
 class FormFragment : Fragment() {
@@ -36,7 +37,6 @@ class FormFragment : Fragment() {
 
     private var user: User? = null
     private var isNew: Boolean = true
-    private var dobTimestamp: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,7 +65,7 @@ class FormFragment : Fragment() {
                 .build().apply {
                     addOnPositiveButtonClickListener {
                         ageBtn.text = headerText
-                        dobTimestamp = it
+                        ageBtn.tag = it
                     }
                 }.show(requireActivity().supportFragmentManager, "")
         }
@@ -162,8 +162,7 @@ class FormFragment : Fragment() {
 //                "Eilat": 2
 //            }
 //            citySpinner.setSelection(citiesMap[user.city])
-//            ageBtn.text = age.toString()
-            ageBtn.text = (getDateStr(age))
+            ageBtn.text = (TimeUtil.getDateStr(dobTimestamp))
         }
     }
 
@@ -183,24 +182,19 @@ class FormFragment : Fragment() {
     }
 
     private fun extractUserData() {
-        user = dobTimestamp?.let {
+        user = ageBtn.tag?.let {
             User(
                 userNameTil.editText?.text.toString(),
                 emailTil.editText?.text.toString(),
                 passwordTil.editText?.text.toString(),
                 if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
                 citySpinner.selectedItem.toString(),
-    //            ageBtn.editText?.text.toString().toInt(),
-                it,
+                it as Long,
                 user?.id ?: 0
             )
         }
     }
 
-    private fun getDateStr(time_stamp_server: Long): String? {
-        val formatter = SimpleDateFormat("MMM dd, yyyy")
-        return formatter.format(time_stamp_server)
-    }
 
     private fun navigateToUserList() {
         val action = FormFragmentDirections.actionFormFragmentToUserListFragment()
