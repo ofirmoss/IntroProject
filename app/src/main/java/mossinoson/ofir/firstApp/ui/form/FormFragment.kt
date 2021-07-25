@@ -1,7 +1,6 @@
 package mossinoson.ofir.firstApp.ui.form
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.gms.common.api.Status
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import mossinoson.ofir.firstApp.R
@@ -37,6 +31,7 @@ class FormFragment : Fragment() {
     private lateinit var genderRg: RadioGroup
     private lateinit var ageBtn: Button
     private lateinit var submitBtn: Button
+    private lateinit var addressActv: AutoCompleteTextView
 
     private lateinit var mUserListViewModel: UserListViewModel
 
@@ -56,12 +51,12 @@ class FormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setViews()
+        initViews()
         checkIfNewUser()
         removeErrorsWhenTextChanges()
         setAgeBtnClickListener()
         setSubmitBtnClickListener()
-        initAutoCompletePlaces()
+        initAddressAutocomplete()
     }
 
     private fun setAgeBtnClickListener() {
@@ -136,7 +131,7 @@ class FormFragment : Fragment() {
         }
     }
 
-    private fun setViews() {
+    private fun initViews() {
         requireView().apply {
             userNameTil = findViewById(R.id.user_name_et)
             emailTil = findViewById(R.id.email_et)
@@ -145,6 +140,7 @@ class FormFragment : Fragment() {
             genderRg = findViewById(R.id.gender_rg)
             ageBtn = findViewById(R.id.age_et)
             submitBtn = findViewById(R.id.submit_btn)
+            addressActv = findViewById(R.id.address_autocomplete)
         }
     }
 
@@ -194,28 +190,7 @@ class FormFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun initAutoCompletePlaces() {
-
-        Places.initialize(requireActivity(), getString(R.string.api_key), Locale.getDefault())
-        // Initialize the AutocompleteSupportFragment.
-        val autocompleteFragment =
-            childFragmentManager.findFragmentById(R.id.autocomplete_fragment)
-                    as AutocompleteSupportFragment
-
-        // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
-
-        // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
-                // Get info about the selected place.
-                Log.d("Ofir", "Place: ${place.name}, ${place.id}")
-            }
-
-            override fun onError(status: Status) {
-                // Handle the error.
-                Log.d("Ofir", "An error occurred: $status")
-            }
-        })
+    private fun initAddressAutocomplete() {
+        addressActv.adapter = AddressAdapter(context)
     }
 }
