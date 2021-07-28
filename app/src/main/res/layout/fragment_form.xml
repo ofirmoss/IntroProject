@@ -144,7 +144,7 @@
 
     </RadioGroup>
 
-    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+    <AutoCompleteTextView
         android:id="@+id/address_autocomplete"
         style="@style/FormStyle"
         android:layout_width="240dp"

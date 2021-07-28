@@ -191,6 +191,6 @@ class FormFragment : Fragment() {
     }
 
     private fun initAddressAutocomplete() {
-        addressActv.adapter = AddressAdapter(context)
+        addressActv.setAdapter(context?.let { AddressAdapter(it) })
     }
 }
