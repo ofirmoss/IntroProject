@@ -24,11 +24,22 @@
     <fragment
         android:id="@+id/userListFragment"
         android:name="mossinoson.ofir.firstApp.ui.userlist.UserListFragment"
-        android:label="UserListFragment" >
+        android:label="UserListFragment">
         <action
             android:id="@+id/action_userListFragment_to_formFragment"
             app:destination="@id/formFragment"
             app:enterAnim="@anim/from_right" />
+        <action
+            android:id="@+id/action_userListFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="mossinoson.ofir.firstApp.ui.map.MapsFragment"
+        android:label="MapsFragment">
+        <argument
+            android:name="address"
+            app:argType="string" />
     </fragment>
 
 </navigation>

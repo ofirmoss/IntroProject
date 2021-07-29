@@ -46,7 +46,14 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
         }
 
         holder.editBtn.setOnClickListener {
-            val action = UserListFragmentDirections.actionUserListFragmentToFormFragment(currentItem)
+            val action =
+                UserListFragmentDirections.actionUserListFragmentToFormFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
+
+        holder.addressTv.setOnClickListener {
+            val action =
+                UserListFragmentDirections.actionUserListFragmentToMapsFragment(currentItem.address)
             holder.itemView.findNavController().navigate(action)
         }
 

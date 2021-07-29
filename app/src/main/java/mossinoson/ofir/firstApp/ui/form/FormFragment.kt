@@ -152,7 +152,10 @@ class FormFragment : Fragment() {
             passwordValidationTil.editText?.setText(password)
             genderRg.check(if (gender == "male") R.id.male_rb else R.id.female_rb)
             addressActv.setText(address)
-            ageBtn.text = (TimeUtil.getDateStr(dobTimestamp))
+            ageBtn.apply {
+                text = (TimeUtil.getDateStr(dobTimestamp))
+                tag = dobTimestamp
+            }
         }
     }
 

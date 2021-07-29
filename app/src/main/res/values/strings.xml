@@ -15,8 +15,9 @@
     <string name="address">Address</string>
 
     <array name="addresses">
-        <item name="address_1">haknest 1, holon</item>
+        <item name="address_1">haknesset 1, holon</item>
         <item name="address_2">tzevi mandelblat 4, hertezlya</item>
+        <item name="address_3">haknesset 10, holon</item>
     </array>
 
     <string name="user_name_category">User name: %s</string>
@@ -26,7 +27,6 @@
     <string name="address_category">Address: %s</string>
     <string name="age_category">Age: %d</string>
     <string name="date_of_birth">Date of birth</string>
-    <string name="google_api_key">AIzaSyCWrtafL6TVZkghiqjhG_mAOKrH00Mmj8c</string>
     <string name="alphabet_letters">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="title_activity_maps">Map</string>
     <string name="delete">delete</string>
