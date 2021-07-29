@@ -12,7 +12,7 @@ data class User(
     val email: String,
     val password: String,
     val gender: String,
-    val city: String,
+    val address: String,
     val dobTimestamp: Long,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0

@@ -27,7 +27,7 @@
             android:id="@+id/email_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/city_tv"
+            app:layout_constraintBottom_toTopOf="@+id/address_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_name_tv"
@@ -37,30 +37,33 @@
 
         <TextView
             android:id="@+id/gender_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/city_tv"
-            app:layout_constraintTop_toTopOf="@+id/city_tv" />
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/address_tv"
+            app:layout_constraintTop_toTopOf="@+id/address_tv" />
 
         <TextView
-            android:id="@+id/city_tv"
-            android:layout_width="wrap_content"
+            android:id="@+id/address_tv"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/gender_tv"
             app:layout_constraintStart_toEndOf="@+id/age_tv"
+            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@+id/email_tv" />
 
         <TextView
             android:id="@+id/age_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/city_tv"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/city_tv" />
+            app:layout_constraintEnd_toStartOf="@id/address_tv"
+            app:layout_constraintTop_toTopOf="@+id/address_tv" />
 
         <ImageButton
             android:id="@+id/delete_btn"
@@ -69,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:contentDescription="@string/delete"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/edit_btn"
@@ -78,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/edit"
             app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

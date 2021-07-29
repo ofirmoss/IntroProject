@@ -151,6 +151,7 @@ class FormFragment : Fragment() {
             passwordTil.editText?.setText(password)
             passwordValidationTil.editText?.setText(password)
             genderRg.check(if (gender == "male") R.id.male_rb else R.id.female_rb)
+            addressActv.setText(address)
             ageBtn.text = (TimeUtil.getDateStr(dobTimestamp))
         }
     }
@@ -177,7 +178,7 @@ class FormFragment : Fragment() {
                 emailTil.editText?.text.toString(),
                 passwordTil.editText?.text.toString(),
                 if (genderRg.checkedRadioButtonId == R.id.male_rb) "male" else "female",
-                "",
+                addressActv.text.toString(),
                 it as Long,
                 user?.id ?: 0
             )
